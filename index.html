@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TZS❤WXY</title>
-    <link rel="stylesheet" href="./Cesium/Widgets/widgets.css" />
-    <script src="./Cesium/Cesium.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cesium.com/downloads/cesiumjs/releases/1.88/Build/Cesium/Widgets/widgets.css"
+    />
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.88/Build/Cesium/Cesium.js"></script>
     <style>
       html,
       body,
@@ -20,91 +23,10 @@
       .cesium-viewer-bottom {
         display: none;
       }
-
-      #toggleInertiaButton {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9;
-      }
-
-      button {
-        position: relative;
-        padding: 10px 20px;
-        border-radius: 7px;
-        border: 1px solid rgb(61, 106, 255);
-        font-size: 14px;
-        text-transform: uppercase;
-        font-weight: 600;
-        letter-spacing: 2px;
-        background: transparent;
-        color: #fff;
-        overflow: hidden;
-        box-shadow: 0 0 0 0 transparent;
-        -webkit-transition: all 0.2s ease-in;
-        -moz-transition: all 0.2s ease-in;
-        transition: all 0.2s ease-in;
-      }
-
-      button:hover {
-        background: rgb(61, 106, 255);
-        box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
-        -webkit-transition: all 0.2s ease-out;
-        -moz-transition: all 0.2s ease-out;
-        transition: all 0.2s ease-out;
-      }
-
-      button:hover::before {
-        -webkit-animation: sh02 0.5s 0s linear;
-        -moz-animation: sh02 0.5s 0s linear;
-        animation: sh02 0.5s 0s linear;
-      }
-
-      button::before {
-        content: "";
-        display: block;
-        width: 0px;
-        height: 86%;
-        position: absolute;
-        top: 7%;
-        left: 0%;
-        opacity: 0;
-        background: #fff;
-        box-shadow: 0 0 50px 30px #fff;
-        -webkit-transform: skewX(-20deg);
-        -moz-transform: skewX(-20deg);
-        -ms-transform: skewX(-20deg);
-        -o-transform: skewX(-20deg);
-        transform: skewX(-20deg);
-      }
-
-      @keyframes sh02 {
-        from {
-          opacity: 0;
-          left: 0%;
-        }
-
-        50% {
-          opacity: 1;
-        }
-
-        to {
-          opacity: 0;
-          left: 100%;
-        }
-      }
-
-      button:active {
-        box-shadow: 0 0 0 0 transparent;
-        -webkit-transition: box-shadow 0.2s ease-in;
-        -moz-transition: box-shadow 0.2s ease-in;
-        transition: box-shadow 0.2s ease-in;
-      }
     </style>
   </head>
 
   <body>
-    <button id="toggleInertiaButton">切换</button>
     <div id="cesiumContainer"></div>
     <script>
       /*
@@ -133,7 +55,7 @@
         } // 绑定事件
         _bindEvent() {
           // 转动的速度设置
-          // this._viewer.clock.multiplier = 15 * 1000;
+          this._viewer.clock.multiplier = 15 * 100;
           // 初始化为单位矩阵
           this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
           this._viewer.scene.postUpdate.addEventListener(this._icrf, this);
@@ -159,7 +81,7 @@
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1ZWFlNzk1ZS0yNWRjLTRlMzUtYmUxNi1jMTJjM2RhMGI0MWEiLCJpZCI6ODgxNCwiaWF0IjoxNjM3ODA4NTk4fQ.4YrCdIO5VncCBrcDETOd3Uj_b9sSMUINHzjChGNPCf0";
 
       let viewer = new Cesium.Viewer("cesiumContainer", {
-        animation: true, // 动画控件
+        animation: false, // 动画控件
         shouldAnimate: false, // 初始时刻运动
         homeButton: false, // Home按钮
         fullscreenButton: false, // 全屏按钮
@@ -183,9 +105,6 @@
       // 地球球体自转
       let globeRotate = new GlobeRotate(viewer);
       globeRotate.start();
-
-      // 添加按钮或其他触发事件的方式，切换惯性系
-      document.getElementById("toggleInertiaButton").onclick = function () {};
 
       var TDU_Key = "a89df02c93e5474e9ebeb81a32fcb487"; //天地图申请的密钥
 
